@@ -1,5 +1,3 @@
-#include <vector>
-
 class Carbono{
 	public:
 		int Branch_Heigth;

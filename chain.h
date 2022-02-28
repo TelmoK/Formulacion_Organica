@@ -1,6 +1,7 @@
 #include <ctime>
 #include <stdlib.h>
 #include <stdio.h>
+
 #include "carbono.h"
 void t(Carbono* CH){
 	std::cout << CH->Branch_Heigth << " CHs " << CH->SubbranchType << " in "<<CH->Subbranch_Position <<std::endl;
@@ -11,7 +12,7 @@ class CChain{
 	
 	void CreateChain();
 	void OrderChain();
-	void CreateMatrix();
+//	void CreateMatrix();
 };
 
 void CChain::CreateChain(){
@@ -94,7 +95,7 @@ void CChain::OrderChain(){
 		
 	}
 }
-
+/*
 void CChain::CreateMatrix(){
 	int maxUpHeigth, maxDownHeigth;
 	int chainPrincipHeigth = 1;
@@ -118,6 +119,8 @@ void CChain::CreateMatrix(){
 	int matrixWidth = (this->mainChain.size() + leftOutstanding + rightOutstanding)*2 - 1;
 	
 	
+	MatrixElement* matrix[matrixWidth][matrixHeigth];
+	
 	std::cout << "matrix[" << matrixWidth << "][" << matrixHeigth << "]\n\n";
 	std::string matrix[matrixWidth][matrixHeigth];
 	for(int i = 0; i < matrixHeigth; i++){
@@ -126,4 +129,4 @@ void CChain::CreateMatrix(){
 		}
 		std::cout << std::endl;
 	}
-}
+}*/
