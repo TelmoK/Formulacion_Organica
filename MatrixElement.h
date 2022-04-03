@@ -4,5 +4,7 @@ class MatrixElement{
 		std::string type;// C para carbono y E para enlace
 		std::vector<MatrixElement*> vecinos;
 		MatrixElement(){}
-		MatrixElement(std::string s): type(s){}
+		void setMatrixElement(std::string s){
+			this->type = s;
+		}
 };

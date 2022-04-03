@@ -2,8 +2,9 @@
 #include <vector>
 #include "Matrix.h"
 
+
 int main(){
-	try{
+
 		CChain ch;
 		ch.CreateChain();
 		std::cout << "-------------------------\n\n";
@@ -15,10 +16,7 @@ int main(){
 		Matrix mtx(ch);
 		mtx.CreateMatrix();
 		mtx.SetMatrix();
-	}
-	catch(...){
-		std::cout << "\nAlgo ha ido mal";
-	}
+		std::cout << "dfghjk";
 	/*std::cout << std::endl;
 	for(Carbono *c: ch.chain){
 		std::cout << "Tipo de radical " << c->radical<<std::endl;

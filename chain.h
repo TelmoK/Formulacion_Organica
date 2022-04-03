@@ -95,38 +95,3 @@ void CChain::OrderChain(){
 		
 	}
 }
-/*
-void CChain::CreateMatrix(){
-	int maxUpHeigth, maxDownHeigth;
-	int chainPrincipHeigth = 1;
-	
-	for(Carbono* CH : this->mainChain){
-		
-		if(CH->SubbranchType.find("up") != std::string::npos && CH->Branch_Heigth > maxUpHeigth){
-			maxUpHeigth = CH->Branch_Heigth;
-		}
-		else if(CH->SubbranchType.find("up") == std::string::npos && CH->Branch_Heigth > maxDownHeigth){
-			maxDownHeigth = CH->Branch_Heigth;
-		}
-	}
-	
-	int matrixHeigth = (maxUpHeigth + maxDownHeigth + chainPrincipHeigth)*2 - 1;
-	
-	int leftOutstanding, rightOutstanding;
-	leftOutstanding = (this->mainChain[0]->SubbranchType.find("-+") != std::string::npos) ?  1 : 0;	
-	rightOutstanding = (this->mainChain[ this->mainChain.size()-1 ]->SubbranchType.find("-+") != std::string::npos) ? 1 : 0;
-	
-	int matrixWidth = (this->mainChain.size() + leftOutstanding + rightOutstanding)*2 - 1;
-	
-	
-	MatrixElement* matrix[matrixWidth][matrixHeigth];
-	
-	std::cout << "matrix[" << matrixWidth << "][" << matrixHeigth << "]\n\n";
-	std::string matrix[matrixWidth][matrixHeigth];
-	for(int i = 0; i < matrixHeigth; i++){
-		for(int j = 0; j < matrixWidth; j++){
-			std::cout << "#";
-		}
-		std::cout << std::endl;
-	}
-}*/
