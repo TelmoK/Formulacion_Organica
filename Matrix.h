@@ -5,11 +5,14 @@ class Matrix{
 	MatrixElement** matrix;
 	int carbono1X, carbono1Y;
 	CChain chain;
+	int matrixHeigth, matrixWidth;
+	
 	public:
 		Matrix(CChain ch): chain(ch){}
+		Matrix(){}
 		void CreateMatrix();
 		void SetMatrix();
-		int matrixHeigth, matrixWidth;
+		std::vector<MatrixElement*> allCarbonos;
 };
 
 void Matrix::CreateMatrix(){
@@ -30,8 +33,8 @@ void Matrix::CreateMatrix(){
 std::cout << maxUpHeigth << " " << maxDownHeigth << std::endl;//............................
 	
 	int leftOutstanding, rightOutstanding;
-	leftOutstanding = (chain.mainChain[0]->SubbranchType.find("-+") != std::string::npos) ?  1 : 0;	
-	rightOutstanding = (chain.mainChain[ chain.mainChain.size()-1 ]->SubbranchType.find("-+") != std::string::npos) ? 1 : 0;
+	leftOutstanding = (chain.mainChain[0]->SubbranchType.find("-+") != std::string::npos) ?  1 : 0;
+	rightOutstanding = (chain.mainChain[ chain.mainChain.size()-1 ]->SubbranchType.find("+") != std::string::npos) ? 1 : 0;
 	
 	this->matrixWidth = (chain.mainChain.size() + leftOutstanding + rightOutstanding)*2 - 1;
 	this->matrixHeigth = (maxUpHeigth + maxDownHeigth + chainPrincipHeigth)*2 - 1;
@@ -57,10 +60,10 @@ std::cout << maxUpHeigth << " " << maxDownHeigth << std::endl;//................
 }
 
 void Matrix::SetMatrix(){
-//	this->matrix[0][0].setMatrixElement("C");
+
 	for(int i = 0; i < chain.mainChain.size(); i++){
 	
-		for(int j = (-1); j < chain.mainChain[i]->Branch_Heigth; j++){//crear ramificacio
+		for(int j = (-1); j < chain.mainChain[i]->Branch_Heigth; j++){//crear ramificaciones
 		
 			if(chain.mainChain[i]->SubbranchType.find("up") == std::string::npos)//si la rama está arriba
 			{
@@ -119,17 +122,8 @@ void Matrix::SetMatrix(){
 	printf(" end");
 	std::cout << "\n-----------x--------------\n";
 	std::cout << "y "<<carbono1Y << "  x " << carbono1X << "\n";
-/*	
-	for(int i = 0; i < this->matrixHeigth; i++){
-		for(int j = 0; j < this->matrixWidth; j++){
-			std::cout << this->matrix[i][j].type << " ";
-			if(this->matrix[i][j].type == ""){
-				std::cout << " ";
-			}
-		}
-		std::cout << std::endl;
-	}*/
-	
+
+
 	for(int i = 0; i < this->matrixHeigth; i ++){
 		for(int j = 0; j < this->matrixWidth; j++){
 			if(this->matrix[i][j].type == "C")
@@ -138,8 +132,29 @@ void Matrix::SetMatrix(){
 				std::cout << "-" << " ";
 			else
 				std::cout << " " << " ";
-		//	std::cout << "#" << " ";
 		}
 		std::cout << std::endl;
+	}
+	//enlazando los hidrocarburos
+	for(int i = 0; i < this->matrixHeigth; i ++){
+		for(int j = 0; j < this->matrixWidth; j++){
+			
+			if(this->matrix[i][j].type == "C")
+			{
+				if(j < (matrixWidth-1))
+					if(this->matrix[ i ][j+1].type == "E") this->matrix[i][j].vecinos.push_back(&this->matrix[ i ][j+2]);
+				
+				if(j > 1)
+					if(this->matrix[ i ][j-1].type == "E") this->matrix[i][j].vecinos.push_back(&this->matrix[ i ][j-2]);
+				
+				if(i > 1)
+					if(this->matrix[i-1][ j ].type == "E") this->matrix[i][j].vecinos.push_back(&this->matrix[i-2][ j ]);
+					
+				if(i < (matrixHeigth-1))
+					if(this->matrix[i+1][j].type == "E") this->matrix[i][j].vecinos.push_back(&this->matrix[i+2][ j ]);
+				
+				allCarbonos.push_back(&this->matrix[i][j]);
+			}
+		}
 	}
 }

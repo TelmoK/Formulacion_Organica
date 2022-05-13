@@ -12,7 +12,6 @@ class CChain{
 	
 	void CreateChain();
 	void OrderChain();
-//	void CreateMatrix();
 };
 
 void CChain::CreateChain(){
@@ -72,21 +71,18 @@ void CChain::OrderChain(){
 			//colisión con anteanterior rama
 			if(this->mainChain[i]->SubbranchType == "-+" && (this->mainChain[i-2]->SubbranchType == "+" || this->mainChain[i-2]->SubbranchType == "-+")
 					&& (this->mainChain[i]->Subbranch_Position == this->mainChain[i-2]->Subbranch_Position)){
-					//	std::cout << "porque anteanterior colisiona (1)\n";
 				this->mainChain[i]->SubbranchType += "up";
 			}
 			
 			//colisión con anterior rama
 			if ((this->mainChain[i-1]->SubbranchType == "+" || this->mainChain[i-1]->SubbranchType == "-+")
 					&& (this->mainChain[i-1]->Subbranch_Position <= this->mainChain[i]->Branch_Heigth || this->mainChain[i]->SubbranchType == "-+")){
-					//	std::cout<<"porque anterior colisiona (2)\n";
 				this->mainChain[i]->SubbranchType += "up";
 			}
 			
 			//eliminar en caso de colisión por arriba o abajo de la cadena principal
 			if((this->mainChain[i-1]->SubbranchType == "+up" || this->mainChain[i-1]->SubbranchType == "-+up")
 					&& (this->mainChain[i-1]->Subbranch_Position <= this->mainChain[i]->Branch_Heigth && this->mainChain[i]->SubbranchType == "-+up")){
-					//	std::cout << "porque anteanterior y el anterior colisiona (3)\n";
 				this->mainChain[i]->SubbranchType = " ";
 				this->mainChain[i]->Branch_Heigth = 0;
 				this->mainChain[i]->Subbranch_Position = 0;
