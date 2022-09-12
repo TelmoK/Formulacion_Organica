@@ -3,9 +3,7 @@
 #include <stdio.h>
 
 #include "carbono.h"
-void t(Carbono* CH){
-	std::cout << CH->Branch_Heigth << " CHs " << CH->SubbranchType << " in "<<CH->Subbranch_Position <<std::endl;
-}
+
 class CChain{
 	public:
 	std::vector<Carbono*> mainChain;
@@ -31,23 +29,23 @@ void CChain::CreateChain(){
 		if(subbranch_Heigth >= 0 && subbranch_Heigth < prov_nonRama){//sin ramificación
 			CH->Branch_Heigth = 0;
 			CH->Subbranch_Position = 0;
-			CH->SubbranchType = " "; t(CH);
+			CH->SubbranchType = " "; 
 		}
 		else if(subbranch_Heigth >= prov_nonRama && subbranch_Heigth < (prov_nonRama + prov_tipoRamaX)){//rama tipo iso
 			CH->Subbranch_Position = CH->Branch_Heigth;
-			CH->SubbranchType = "-+";t(CH);
+			CH->SubbranchType = "-+";
 		}
 		else if(subbranch_Heigth >= (prov_nonRama + prov_tipoRamaX) && subbranch_Heigth < (prov_nonRama + prov_tipoRamaX*2)){//rama tipo sec
 			CH->Subbranch_Position = 1;
-			CH->SubbranchType = "+";t(CH);
+			CH->SubbranchType = "+";
 		}
 		else if(subbranch_Heigth >= (prov_nonRama + prov_tipoRamaX*2) && subbranch_Heigth < (prov_nonRama + prov_tipoRamaX*3)){//rama terc
 			CH->Subbranch_Position = 1;
-			CH->SubbranchType = "-+";t(CH);
+			CH->SubbranchType = "-+";
 		}
 		else if(subbranch_Heigth >= (prov_nonRama + prov_tipoRamaX*3) && subbranch_Heigth < (prov_nonRama + prov_tipoRamaX*4)){//rama neo
 			CH->Subbranch_Position = CH->Branch_Heigth - 1;
-			CH->SubbranchType = "-+";t(CH);
+			CH->SubbranchType = "-+";
 		}
 		
 		this->mainChain.push_back( CH );

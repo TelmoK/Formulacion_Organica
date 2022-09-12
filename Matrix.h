@@ -30,7 +30,6 @@ void Matrix::CreateMatrix(){
 			maxDownHeigth = CH->Branch_Heigth;
 		}
 	}
-std::cout << maxUpHeigth << " " << maxDownHeigth << std::endl;//............................
 	
 	int leftOutstanding, rightOutstanding;
 	leftOutstanding = (chain.mainChain[0]->SubbranchType.find("-+") != std::string::npos) ?  1 : 0;
@@ -49,14 +48,14 @@ std::cout << maxUpHeigth << " " << maxDownHeigth << std::endl;//................
 	
 	
 	//.....................................
-	std::cout << "matrix[" << matrixHeigth << "][" << matrixWidth << "]\n\n";
+/*	std::cout << "matrix[" << matrixHeigth << "][" << matrixWidth << "]\n\n";
 	std::cout << "y "<<carbono1Y << "  x " << carbono1X << "\n\n";
 	for(int i = 0; i < matrixHeigth; i ++){
 		for(int j = 0; j < matrixWidth; j++){
 			std::cout << "#" << " ";
 		}
 		std::cout << std::endl;
-	}
+	}*/
 }
 
 void Matrix::SetMatrix(){
@@ -78,13 +77,13 @@ void Matrix::SetMatrix(){
 		}
 		
 		if(chain.mainChain[i]->Branch_Heigth == 0)
-		{std::cout << "R";
-			this->matrix[carbono1Y][carbono1X+ 2*i].setMatrixElement("C");std::cout << "H";
+		{
+			this->matrix[carbono1Y][carbono1X+ 2*i].setMatrixElement("C");
 		}
 		else{// Subrramas
-		std::cout << "R";
+		
 			if(chain.mainChain[i]->SubbranchType == "-+"){
-					std::cout << "Bsbr-+ ";
+				
 				this->matrix[carbono1Y + chain.mainChain[i]->Subbranch_Position*2 ][ carbono1X + 2*i + 1].setMatrixElement("E");
 				this->matrix[carbono1Y + chain.mainChain[i]->Subbranch_Position*2 ][ carbono1X + 2*i + 2].setMatrixElement("C");
 				
@@ -92,7 +91,7 @@ void Matrix::SetMatrix(){
 				this->matrix[carbono1Y + chain.mainChain[i]->Subbranch_Position*2 ][ carbono1X + 2*i - 2].setMatrixElement("C");
 			}
 			else if(chain.mainChain[i]->SubbranchType == "-+up"){
-					std::cout << "Bsbr-+up ";
+			
 				this->matrix[carbono1Y - chain.mainChain[i]->Subbranch_Position*2 ][ carbono1X + 2*i + 1].setMatrixElement("E");
 				this->matrix[carbono1Y - chain.mainChain[i]->Subbranch_Position*2 ][ carbono1X + 2*i + 2].setMatrixElement("C");
 				
@@ -100,28 +99,22 @@ void Matrix::SetMatrix(){
 				this->matrix[carbono1Y - chain.mainChain[i]->Subbranch_Position*2 ][ carbono1X + 2*i - 2].setMatrixElement("C");
 			}
 			else if(chain.mainChain[i]->SubbranchType == "+"){
-					std::cout << "Bsbr+ ";
+			
 				this->matrix[carbono1Y + chain.mainChain[i]->Subbranch_Position*2 ][ carbono1X + 2*i + 1].setMatrixElement("E");
 				this->matrix[carbono1Y + chain.mainChain[i]->Subbranch_Position*2 ][ carbono1X + 2*i + 2].setMatrixElement("C");
 			}
 			else if(chain.mainChain[i]->SubbranchType == "+up"){
-					std::cout << "Bsbr+up ";
+				
 				this->matrix[carbono1Y - chain.mainChain[i]->Subbranch_Position*2 ][ carbono1X + 2*i + 1].setMatrixElement("E");
 				this->matrix[carbono1Y - chain.mainChain[i]->Subbranch_Position*2 ][ carbono1X + 2*i + 2].setMatrixElement("C");
 			}
 		}
 		
-		std::cout<<i;
 		if(i != chain.mainChain.size() - 1){//enlaces de la cadena principal
 			this->matrix[carbono1Y][carbono1X + 2*i + 1].setMatrixElement("E");
 		}
-		std::cout << "f\t";
+
 	}
-	
-	
-	printf(" end");
-	std::cout << "\n-----------x--------------\n";
-	std::cout << "y "<<carbono1Y << "  x " << carbono1X << "\n";
 
 
 	for(int i = 0; i < this->matrixHeigth; i ++){

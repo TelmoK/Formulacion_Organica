@@ -19,11 +19,12 @@ Solver::Solver(Matrix mtx){
 }
 
 std::string Solver::Solve(){
+	int y = 0;
+	std::vector< std::vector<MatrixElement*> > recorridos;
 	
 	for(MatrixElement* extremoActual : numExtremos){
 		
 		std::vector<MatrixElement*> recorridoActual;
-		std::vector< std::vector<MatrixElement*> > recorridos;
 		std::vector<MatrixElement*> checkedCarbonos;
 		
 		recorridoActual.push_back(extremoActual);
@@ -33,6 +34,17 @@ std::string Solver::Solve(){
 		while(checkedCarbonos.size() != this->matrix.allCarbonos.size()){
 				
 			bool quedanConexiones = false;
+			for(MatrixElement* carbono : carbonoActual->vecinos){
+				
+				if(std::find(checkedCarbonos.begin(), checkedCarbonos.end(), carbono) == checkedCarbonos.end()){//si carbono no esta en checked
+					recorridoActual.push_back(carbono);
+					checkedCarbonos.push_back(carbono);
+					carbonoActual = carbono; 
+					
+					quedanConexiones = true;
+				}
+			}
+	/*		bool quedanConexiones = false;
 			for(MatrixElement* carbono : carbonoActual->vecinos){
 				
 				if(std::find(checkedCarbonos.begin(), checkedCarbonos.end(), carbono) == checkedCarbonos.end()){//si carbono no esta en checked
@@ -58,7 +70,7 @@ std::string Solver::Solve(){
 						if(std::find(checkedCarbonos.begin(), checkedCarbonos.end(), e) == checkedCarbonos.end())
 							vecinosLibres = true;
 				}	
-			}
+			}*/
 		}
 		
 		int i = 0;
@@ -69,7 +81,8 @@ std::string Solver::Solve(){
 			std::cout << i << "--------------\n";
 			i++;
 		}
-		std::cout << "-----------------------------\n";
+		std::cout << "-----------------------------"<<y<<"\n";
+		y++;
 	}
 	return "";
 }
